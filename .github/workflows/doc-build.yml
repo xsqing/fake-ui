@@ -1,28 +1,66 @@
-name: NodeJS with Webpack
+# Sample workflow for building and deploying a VitePress site to GitHub Pages
+#
+name: 打包部署vitepress到github pages
 
 on:
+  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
+  # using the `master` branch as the default branch.
   push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Not needed if lastUpdated is not enabled
+      # - uses: pnpm/action-setup@v2 # Uncomment this if you're using pnpm
+      # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
+      - name: 设置node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Build
+          node-version: 20
+          cache: npm # or pnpm / yarn
+      - name: 打包流程
+        uses: actions/configure-pages@v3
+      - name: 安装依赖
+        run: npm i
+      - name: 打包
         run: |
-          npm install
           npm run docs:build
+          touch docs/.vitepress/dist/.nojekyll
+      - name: 上传制品
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/.vitepress/dist
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: 部署
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
