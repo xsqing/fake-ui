@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: "/fake-ui/",
   title: "fake-ui",
   description: "fake-ui vue3 progressive ui component study",
   themeConfig: {
