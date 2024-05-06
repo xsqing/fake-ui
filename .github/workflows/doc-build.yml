@@ -26,6 +26,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    name: "打包"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
