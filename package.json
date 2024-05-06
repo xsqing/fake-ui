@@ -1,0 +1,26 @@
+{
+  "name": "fake-ui",
+  "version": "1.0.0",
+  "description": "渐进式的vue3前端组件库构建学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "组件库",
+    "Vue3",
+    "渐进式学习"
+  ],
+  "author": "sqing",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "vitepress": "^1.1.4"
+  },
+  "dependencies": {
+    "vue": "^3.4.26"
+  }
+}
