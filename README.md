@@ -13,3 +13,7 @@
 npm i
 npm run docs:dev
 ```
+
+## 3、使用文档
+
+[fake-ui 使用文档](https://xsqing.github.io/fake-ui/)
