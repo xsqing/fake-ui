@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    // 支撑dom和es当前规范中的提案和草案
+    "lib": ["DOM", "ESNext"],
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    // 表示在编译过程中保留 JSX 代码不进行转换
+    "jsx": "preserve",
+    // 指定在编译过程中使用的 JSX 转换工具
+    "jsxImportSource": "vue",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "stripInternal": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noImplicitThis": true
+  },
+  "include": ["components/**/*"],
+  "exclude": ["node_modules"]
+}

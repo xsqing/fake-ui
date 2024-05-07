@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "fake-ui"
-  text: "渐进式的学习如何构建vue3组件库"
+  name: 'fake-ui'
+  text: '渐进式的学习如何构建vue3组件库'
   tagline: 千里之行，始于足下
   actions:
     - theme: brand
