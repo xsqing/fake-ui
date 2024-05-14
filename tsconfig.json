@@ -25,6 +25,6 @@
     "strict": true,
     "noImplicitThis": true
   },
-  "include": ["components/**/*"],
+  "include": ["components/**/*", "preview/**/*"],
   "exclude": ["node_modules"]
 }
