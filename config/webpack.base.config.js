@@ -21,10 +21,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.less$/i,
+        test: /\.(less|css)$/i,
         use: [
           // compiles Less to CSS
           MiniCssExtractPlugin.loader, // 移出了style-loader
+          // 'style-loader',
           'css-loader',
           'less-loader',
         ],
@@ -33,7 +34,9 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name]/index.css', // 将组件使用的 CSS 输出到 css/components 文件夹中
+      filename: chunkData => {
+        return chunkData.chunk.name === 'fakeui' ? 'style.css' : '[name]/style.css';
+      }, // 将组件使用的 CSS 输出到 css/components 文件夹中
     }),
   ],
   output: {

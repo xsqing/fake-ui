@@ -1,7 +1,8 @@
 import { computed, defineComponent, toRef, type PropType } from 'vue';
 import './styles/index.less';
 import { WorldType } from './type';
-export default defineComponent({
+import withInstall from '../../utils/withInstall';
+const HelloWorld = defineComponent({
   props: {
     // 给组件加入参数type,jsx不能通过defineProps设定参数
     type: {
@@ -9,6 +10,7 @@ export default defineComponent({
       type: String as PropType<WorldType>,
     },
   },
+  name: 'HelloWorld',
   setup(props) {
     const worldType = toRef(props.type);
 
@@ -36,3 +38,4 @@ export default defineComponent({
     return render;
   },
 });
+export default withInstall(HelloWorld);

@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import HelloWorld from '../components/hello-world';
+import HelloWorld from '../dist/es/hello-world';
 export default defineComponent({
   setup() {
     const render = () => {
