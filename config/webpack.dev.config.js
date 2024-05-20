@@ -16,6 +16,23 @@ const dev = merge(baseConfig, {
     compress: true,
     port: 9000,
   },
+  module: {
+    rules: [
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              symbolId: 'icon-[name]',
+              include: [path.join(__dirname, 'preview/statics/icons')],
+            },
+          },
+          'svgo-loader',
+        ],
+      },
+    ],
+  },
   plugins: [
     new htmlWebpackPlugin({
       template: './preview/index.html', //html模板
