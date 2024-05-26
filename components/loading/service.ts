@@ -8,7 +8,13 @@ export const Loading = function (options: LoadingOptions): LoadingApp {
   const loadingApp = createLoadingElement(resolvedOptions);
   // 将loading元素添加到指定位置
   resolvedOptions.parent.appendChild(loadingApp.loadingInstance.$el);
+  addClassList(resolvedOptions);
   return loadingApp;
+};
+
+const addClassList = function (options: LoadingOptionsResolved) {
+  // 给loading父元素添加class
+  options.parent.classList.add('loading-parent--reative');
 };
 
 // 解析options

@@ -1,6 +1,5 @@
-import { createApp, defineComponent, h, reactive, toRef, vShow, withDirectives } from 'vue';
+import { createApp, defineComponent, h, reactive, vShow, withDirectives } from 'vue';
 import type { LoadingOptionsResolved } from './type';
-
 export function createLoadingElement(options: LoadingOptionsResolved) {
   // 响应式数据、
   const data = reactive({
@@ -17,14 +16,21 @@ export function createLoadingElement(options: LoadingOptionsResolved) {
       };
     },
   });
-
+  const close = function () {
+    data.visible = false;
+  };
+  const show = function () {
+    data.visible = true;
+  };
   // loadingApp
   const loadingApp = createApp(loadingElement);
   // loadingInstance是根组件实例，也就是通过执行应用实例挂载方法，返回了根组件的实例，也就是loadingElement的实例，
   const loadingInstance = loadingApp.mount(document.createElement('div'));
   return {
     loadingInstance,
-    ...toRef(data),
+    data,
+    close,
+    show,
   };
 }
 

@@ -32,5 +32,3 @@ export interface ElementLoading extends HTMLElement {
     options: LoadingOptions;
   };
 }
-
-export type LoadingBinding = boolean | UnwrapRef<Partial<LoadingOptions>>;

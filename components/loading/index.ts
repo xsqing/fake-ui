@@ -1,6 +1,6 @@
 import { Loading as LoadingService } from './service';
 import { loadingDirective } from './directive';
-
+import '../loading/style/index.less';
 import type { App } from 'vue';
 export const Loading = {
   install(app: App) {
@@ -8,7 +8,7 @@ export const Loading = {
     app.config.globalProperties.$loading = LoadingService;
   },
   directive: loadingDirective,
-  setvice: LoadingService,
+  service: LoadingService,
 };
 
 export default Loading;

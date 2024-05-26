@@ -1,11 +1,16 @@
-import { defineComponent, ref } from 'vue';
-
+import { defineComponent, onMounted } from 'vue';
+import { LoadingService } from '../components/loading';
 export default defineComponent({
   setup() {
-    const visible = ref(true);
-    setTimeout(() => {
-      visible.value = false;
-    }, 2000);
+    onMounted(() => {
+      const loading = LoadingService({
+        visible: true,
+        target: '#test',
+      });
+      setTimeout(() => {
+        loading.close();
+      }, 2000);
+    });
     const render = () => {
       return (
         <>
@@ -21,7 +26,7 @@ export default defineComponent({
                 fontSize: '48px',
                 color: '#ffffff',
               }}
-              v-loading={visible.value}
+              id="test"
             >
               hello world
             </div>

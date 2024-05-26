@@ -1,22 +1,11 @@
 import type { Directive, DirectiveBinding } from 'vue';
-import { isObject } from '@vue/shared';
-import {
-  INSTANCE_KEY,
-  type ElementLoading,
-  type LoadingBinding,
-  type LoadingOptions,
-} from './type';
+import { INSTANCE_KEY, type ElementLoading, type LoadingOptions } from './type';
 import { Loading } from './service';
-const getBindingProp = <K extends keyof LoadingOptions>(
-  key: K,
-  binding: DirectiveBinding<LoadingBinding>,
-) => {
-  return isObject(binding.value) ? binding.value[key] : binding.value;
-};
-const createInstace = (el: ElementLoading, binding: DirectiveBinding<LoadingBinding>) => {
+
+const createInstace = (el: ElementLoading, binding: DirectiveBinding<boolean>) => {
   const options: LoadingOptions = {
     target: el,
-    visible: getBindingProp('visible', binding) ?? false,
+    visible: binding.value,
   };
   el[INSTANCE_KEY] = {
     options,
@@ -24,7 +13,7 @@ const createInstace = (el: ElementLoading, binding: DirectiveBinding<LoadingBind
   };
 };
 
-export const loadingDirective: Directive<ElementLoading, LoadingBinding> = {
+export const loadingDirective: Directive<ElementLoading, boolean> = {
   mounted(el, binding) {
     if (binding.value) {
       createInstace(el, binding);
@@ -32,6 +21,10 @@ export const loadingDirective: Directive<ElementLoading, LoadingBinding> = {
   },
   updated(el, binding) {
     const app = el[INSTANCE_KEY];
-    app.instance;
+    if (binding.value) {
+      app.instance.show();
+    } else {
+      app.instance.close();
+    }
   },
 };
