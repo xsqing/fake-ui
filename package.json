@@ -21,6 +21,7 @@
     "vitepress": "^1.1.4"
   },
   "dependencies": {
-    "vue": "^3.4.26"
+    "vue": "^3.4.26",
+    "lodash": "4.17.15"
   }
 }
